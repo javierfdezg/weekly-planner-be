@@ -31,7 +31,7 @@ module.exports.register = (server) => {
         );
     });
 
-    server.on('restifyError', (req, res) => {
+    server.on('restifyError', (req, res, err) => {
         res.send(httpStatusCodes.INTERNAL_SERVER_ERROR, err);
     });
 };

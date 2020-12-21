@@ -51,7 +51,7 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.fullResponse());
 server.use(
     restify.plugins.bodyParser({
-        mapParams: false
+        mapParams: true
     })
 );
 

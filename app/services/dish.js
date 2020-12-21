@@ -1,6 +1,5 @@
 'use strict';
 
-
 class DishService {
     constructor(log, mongoose, httpStatus, errs) {
         this.log = log;

@@ -24,18 +24,37 @@ serviceLocator.register('dishService', (serviceLocator) => {
     const mongoose = serviceLocator.get('mongoose');
     const httpStatus = serviceLocator.get('httpStatus');
     const errs = serviceLocator.get('errs');
-    const UserService = require('../services/dish');
+    const DishService = require('../services/dish');
 
-    return new UserService(log, mongoose, httpStatus, errs);
+    return new DishService(log, mongoose, httpStatus, errs);
 });
 
 serviceLocator.register('dishController', (serviceLocator) => {
     const log = serviceLocator.get('logger');
     const httpStatus = serviceLocator.get('httpStatus');
     const dishService = serviceLocator.get('dishService');
-    const UserController = require('../controllers/dish');
+    const DishController = require('../controllers/dish');
 
-    return new UserController(log, dishService, httpStatus);
+    return new DishController(log, dishService, httpStatus);
+});
+
+serviceLocator.register('ingredientService', (serviceLocator) => {
+    const log = serviceLocator.get('logger');
+    const mongoose = serviceLocator.get('mongoose');
+    const httpStatus = serviceLocator.get('httpStatus');
+    const errs = serviceLocator.get('errs');
+    const IngredientService = require('../services/ingredient');
+
+    return new IngredientService(log, mongoose, httpStatus, errs);
+});
+
+serviceLocator.register('ingredientController', (serviceLocator) => {
+    const log = serviceLocator.get('logger');
+    const httpStatus = serviceLocator.get('httpStatus');
+    const ingredientService = serviceLocator.get('ingredientService');
+    const IngredientController = require('../controllers/ingredient');
+
+    return new IngredientController(log, ingredientService, httpStatus);
 });
 
 module.exports = serviceLocator;
