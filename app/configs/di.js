@@ -33,9 +33,10 @@ serviceLocator.register('dishController', (serviceLocator) => {
     const log = serviceLocator.get('logger');
     const httpStatus = serviceLocator.get('httpStatus');
     const dishService = serviceLocator.get('dishService');
+    const ingredientService = serviceLocator.get('ingredientService');
     const DishController = require('../controllers/dish');
 
-    return new DishController(log, dishService, httpStatus);
+    return new DishController(log, dishService, ingredientService, httpStatus);
 });
 
 serviceLocator.register('ingredientService', (serviceLocator) => {

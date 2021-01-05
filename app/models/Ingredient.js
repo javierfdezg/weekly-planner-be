@@ -4,7 +4,7 @@ const config = require('../configs/configs');
 const serviceLocator = require('../lib/service_locator');
 const mongoose = serviceLocator.get('mongoose');
 
-const ingredientsSchema = new mongoose.Schema({
+const ingredientSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -21,4 +21,4 @@ const ingredientsSchema = new mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model('Ingredients', ingredientsSchema, 'ingredients');
+module.exports = mongoose.model('Ingredient', ingredientSchema);

@@ -1,6 +1,7 @@
 'use strict';
 
 class DishService {
+
     constructor(log, mongoose, httpStatus, errs) {
         this.log = log;
         this.mongoose = mongoose;
@@ -9,17 +10,22 @@ class DishService {
     }
 
     async createDish(body) {
-        const Dishes = require('../models/Dishes');
 
-        let newDish = new Dishes(body);
+        const Dish = require('../models/Dish');
+        const Ingredient = require('../models/Ingredient');
+
+        let newDish = new Dish(body);
         newDish = await newDish.save();
 
-        this.log.info('Dish Created Successfully');
-        return newDish;
+        return Dish.findOne({_id: newDish._id})
+            .populate({ path: 'ingredients', model: Ingredient })
+            .exec();
     }
 
     async getDishes(searchString) {
-        const Dishes = require('../models/Dishes');
+
+        const Dish = require('../models/Dish');
+        const Ingredient = require('../models/Ingredient');
 
         let query = {};
         if (searchString) {
@@ -27,10 +33,12 @@ class DishService {
             this.log.debug(`Dishes service query=[${query}]`);
         }
 
-
-        const dishes = await Dishes.find(query);
+        const dishes = await Dish.find(query).populate({ path: 'ingredients', model: Ingredient }).exec();
         this.log.info('Dishes fetched Successfully');
+
+        console.log(dishes);
         return dishes;
+
     }
 }
 

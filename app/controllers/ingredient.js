@@ -26,7 +26,7 @@ class IngredientController {
                 searchString = req.query.search;
 
             this.log.debug(`Dishes controller: search=[${searchString}]`);
-            const result = await this.ingredientService.getIngredients(searchString);
+            const result = await this.ingredientService.findIngredients(searchString);
 
             res.send(result);
         } catch (err) {

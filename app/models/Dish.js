@@ -3,9 +3,8 @@
 const config = require('../configs/configs');
 const serviceLocator = require('../lib/service_locator');
 const mongoose = serviceLocator.get('mongoose');
-const ObjectID = require("mongodb").ObjectID;
 
-const dishesSchema = new mongoose.Schema({
+const dishSchema = new mongoose.Schema({
         name: {
             type: String,
             required: true,
@@ -17,8 +16,8 @@ const dishesSchema = new mongoose.Schema({
             required: false
         },
         ingredients: [{
-            type: Array,
-            required: false
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Ingredient'
         }],
         imageUrl: {
             type: String,
@@ -32,4 +31,4 @@ const dishesSchema = new mongoose.Schema({
     }
 );
 
-module.exports = mongoose.model('Dishes', dishesSchema, 'dishes');
+module.exports = mongoose.model('Dish', dishSchema);

@@ -9,7 +9,7 @@ class IngredientService {
     }
 
     async createIngredient(body) {
-        const Ingredients = require('../models/Ingredients');
+        const Ingredients = require('../models/Ingredient');
 
         let ingredientQuery = {};
         if (body._id) {
@@ -38,8 +38,8 @@ class IngredientService {
         return newIngredient;
     }
 
-    async getIngredients(searchString) {
-        const Ingredients = require('../models/Ingredients');
+    async findIngredients(searchString) {
+        const Ingredients = require('../models/Ingredient');
 
         let query = {};
         if (searchString) {
@@ -49,6 +49,17 @@ class IngredientService {
 
         const ingredients = await Ingredients.find(query);
         this.log.info('Ingredients fetched Successfully');
+        return ingredients;
+    }
+
+    async getIngredientsFromList(ingredientList) {
+        const Ingredients = require('../models/Ingredient');
+
+        let ingredients = await Ingredients.find({_id: {
+                $in: ingredientList
+            }
+        });
+
         return ingredients;
     }
 }

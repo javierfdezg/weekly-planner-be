@@ -31,7 +31,7 @@ class Database {
         });
 
         // initialize Model
-        require('../models/Dishes');
+        require('../models/Dish');
     }
 }
 

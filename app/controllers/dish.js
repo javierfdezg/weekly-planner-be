@@ -1,17 +1,20 @@
 'use strict';
 
 class DishController {
-    constructor(log, dishService, httpSatus) {
+    constructor(log, dishService, ingredientService, httpSatus) {
         this.log = log;
         this.dishService = dishService;
+        this.ingredientService = ingredientService;
         this.httpSatus = httpSatus;
     }
 
     async create(req, res) {
         try {
             const { body } = req;
-            const result = await this.dishService.createDish(body);
 
+            let result = await this.dishService.createDish(body);
+
+            console.log(result)
             res.send(result);
         } catch (err) {
             this.log.error(err.message);
