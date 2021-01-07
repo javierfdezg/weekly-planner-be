@@ -10,7 +10,6 @@ class DishService {
     }
 
     async createDish(body) {
-
         const Dish = require('../models/Dish');
         const Ingredient = require('../models/Ingredient');
 
@@ -38,7 +37,17 @@ class DishService {
 
         console.log(dishes);
         return dishes;
+    }
 
+    async getDish(id) {
+        const Dish = require('../models/Dish');
+        const Ingredient = require('../models/Ingredient');
+
+        const dish = await Dish.findOne({ _id: id }).populate({ path: 'ingredients', model: Ingredient }).exec();
+        this.log.info('Dishes fetched Successfully');
+
+        console.log(dish);
+        return dish;
     }
 }
 

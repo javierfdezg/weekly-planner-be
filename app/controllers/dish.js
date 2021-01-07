@@ -38,6 +38,17 @@ class DishController {
         }
     }
 
+    async get(req, res) {
+        try{
+            this.log.debug(`Dishes controller: get=[${req.params._id}]`);
+            const result = await this.dishService.getDish(req.params._id);
+
+            res.send(result);
+        } catch (err) {
+            this.log.error(err.message);
+            res.send(err);
+        }
+    }
 }
 
 module.exports = DishController;

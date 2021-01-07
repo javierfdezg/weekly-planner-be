@@ -22,6 +22,7 @@ module.exports.register = (server, serviceLocator) => {
         }
     );
 
+
     server.post(
         {
             path: '/dishes',
@@ -42,6 +43,17 @@ module.exports.register = (server, serviceLocator) => {
         },
         (req, res, next) => {
             serviceLocator.get('dishController').getAll(req, res, next);
+        }
+    );
+
+    server.get(
+        {
+            path: '/dishes/:_id',
+            name: 'Get Dishes',
+            version: '1.0.0',
+        },
+        (req, res, next) => {
+            serviceLocator.get('dishController').get(req, res, next);
         }
     );
 };
