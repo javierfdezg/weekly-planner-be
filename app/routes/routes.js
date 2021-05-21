@@ -56,4 +56,15 @@ module.exports.register = (server, serviceLocator) => {
             serviceLocator.get('dishController').get(req, res, next);
         }
     );
+
+    server.post(
+        {
+            path: '/meals',
+            name: 'Create Meal',
+            version: '1.0.0',
+        },
+        (req, res, next) => {
+            serviceLocator.get('mealController').create(req, res, next);
+        }
+    );
 };

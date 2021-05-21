@@ -58,4 +58,23 @@ serviceLocator.register('ingredientController', (serviceLocator) => {
     return new IngredientController(log, ingredientService, httpStatus);
 });
 
+serviceLocator.register('mealService', (serviceLocator) => {
+    const log = serviceLocator.get('logger');
+    const mongoose = serviceLocator.get('mongoose');
+    const httpStatus = serviceLocator.get('httpStatus');
+    const errs = serviceLocator.get('errs');
+    const MealService = require('../services/meal');
+
+    return new MealService(log, mongoose, httpStatus, errs);
+});
+
+serviceLocator.register('mealController', (serviceLocator) => {
+    const log = serviceLocator.get('logger');
+    const httpStatus = serviceLocator.get('httpStatus');
+    const mealService = serviceLocator.get('mealService');
+    const MealController = require('../controllers/meal');
+
+    return new MealController(log, mealService, httpStatus);
+});
+
 module.exports = serviceLocator;
